@@ -1,0 +1,17 @@
+.navbar {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.main {
+    width: 100%;
+    min-height: 58.4vh;
+    margin-top: 132px; /* Adjusted for fixed navbar height */
+}
+
+.main-no-footer {
+    width: 100%;
+}

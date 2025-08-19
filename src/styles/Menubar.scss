@@ -1,0 +1,7 @@
+@use '../index' as base;
+
+.menu {
+    color: base.$primary-color;
+    background-color: base.$tertiary-color;
+    padding: 1.6rem 8rem;
+}

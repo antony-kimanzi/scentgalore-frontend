@@ -1,0 +1,17 @@
+$header-font : 'Trajan Pro', sans-serif;
+$subheader1-font : 'Product Sans Light', sans-serif;
+$subheader2-font : 'Product Sans', sans-serif;
+$body-font : 'Montserrat', sans-serif;
+$primary-color: #000000;
+$secondary-color: #DEAC06;
+$tertiary-color: #f1f1f1;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $tertiary-color;
+}

@@ -1,0 +1,38 @@
+@use '../index' as base;
+
+.shop {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 10rem;
+  background-color: base.$tertiary-color;
+  font-family: base.$body-font;
+  color: base.$primary-color;
+
+  
+  h1 {
+    font-family: base.$header-font;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  h3 {
+    font-family: base.$subheader1-font;
+      font-weight: 300;
+      font-size: 1.7rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+      color: base.$primary-color;
+      font-weight: 400;
+  }
+
+  .product-section {
+    width: 100%;
+    padding: 2.5rem 10rem;
+    background-color: base.$tertiary-color;
+    font-family: base.$body-font;
+  }
+}

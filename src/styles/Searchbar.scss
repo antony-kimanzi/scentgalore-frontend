@@ -1,0 +1,38 @@
+@use "../index" as base;
+
+input {
+  width: 420px;
+  border: none;
+  border-bottom: solid 1px #3d3d3d;
+  outline: none;
+  background: transparent;
+  color: base.$primary-color;
+  font-size: 16px;
+  font-family: base.$body-font;
+  flex-grow: 1;
+
+  &::placeholder {
+    color: #575757;
+  }
+
+  &:focus {
+    border-bottom: solid 2.5px base.$primary-color;
+  }
+}
+
+.search-button {
+  margin-left: 12px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: auto;
+    fill: base.$primary-color;
+
+    &:hover {
+      fill: base.$secondary-color;
+    }
+  }
+}

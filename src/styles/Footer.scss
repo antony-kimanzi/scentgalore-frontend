@@ -1,0 +1,147 @@
+@use "../index" as base;
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.6rem 8rem;
+  background-color: base.$primary-color;
+  font-family: base.$body-font;
+
+  .links-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1.6rem;
+
+    .logo {
+      width: 180px;
+      height: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      a {
+        color: base.$tertiary-color;
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      p {
+        color: base.$tertiary-color;
+        font-size: 0.9rem;
+      }
+    }
+
+    .social-icons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      p {
+        color: base.$tertiary-color;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .icons {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .copyright-section {
+    text-align: center;
+    color: base.$tertiary-color;
+    font-size: 0.8rem;
+
+    .horizontal-line {
+      width: 1700px;
+      border-top: 1px solid #555555;
+      margin: 20px 0;
+    }
+  }
+}
+
+.footer-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 3rem;
+  background-color: base.$primary-color;
+  font-family: base.$body-font;
+
+  .links-section-mobile {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 1.6rem;
+
+    .logo-mobile {
+      width: 100px;
+      height: auto;
+    }
+
+    .footer-links-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      a {
+        color: base.$tertiary-color;
+        text-decoration: none;
+        font-size: 0.9rem;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      p {
+        color: base.$tertiary-color;
+        font-size: 0.9rem;
+      }
+    }
+
+    .social-icons-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+
+      p {
+        color: base.$tertiary-color;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .icons-mobile {
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+
+  .copyright-section-mobile {
+    text-align: center;
+    color: base.$tertiary-color;
+    font-size: 0.8rem;
+
+    .horizontal-line-mobile {
+      width: 300px;
+      border-top: 1px solid #555555;
+      margin: 20px 0;
+    }
+  }
+}
+
+

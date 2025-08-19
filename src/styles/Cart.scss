@@ -1,0 +1,69 @@
+@use "../index" as base;
+
+.cart {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:4rem 8rem;
+  background-color: base.$tertiary-color;
+  font-family: base.$body-font;
+  color: base.$primary-color;
+
+  h2 {
+    font-family: base.$subheader1-font;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+  }
+  button {
+    font-family: base.$body-font;
+    background-color: base.$primary-color;
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #acacac;
+      color: base.$tertiary-color;
+      transform: scale(1.05);
+    }
+  }
+
+  .login-section {
+    margin-top: 3.5rem;
+  }
+
+  h3 {
+    font-family: base.$subheader1-font;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+    font-weight: 300;
+  }
+
+  p {
+    font-family: base.$body-font;
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: auto;
+
+    .login-link {
+      color: rgb(0, 138, 138);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

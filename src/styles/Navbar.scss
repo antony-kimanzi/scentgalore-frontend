@@ -1,0 +1,74 @@
+@use "../index" as base;
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 8rem;
+  background-color: base.$tertiary-color;
+  color: base.$primary-color;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+  .logo {
+    width: 140px;
+    height: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-right: 30px;
+
+    .nav-link {
+      margin-top: 4px;
+      font-size: 17px;
+      font-weight: 500;
+      color: base.$primary-color;
+      text-decoration: none;
+      font-family: base.$body-font;
+
+      &:hover {
+        color: base.$secondary-color;
+      }
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.5rem;
+      margin-left: 3rem;
+    }
+  }
+
+  .search-icon {
+    margin-right: 1.2em;
+  }
+}
+
+.nav-mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: base.$tertiary-color;
+  color: base.$primary-color;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+  .logo-mobile {
+    width: 100px;
+    height: auto;
+  }
+
+  .nav-icons {
+    display: flex;
+    gap: 1.5rem;
+
+    .search-icon-mobile {
+      margin-right: 1em;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      color: base.$primary-color;
+    }
+  }
+}

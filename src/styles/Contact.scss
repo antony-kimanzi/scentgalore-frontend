@@ -1,0 +1,154 @@
+@use "../index" as base;
+
+.contact {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 32rem;
+  background-color: base.$tertiary-color;
+  font-family: base.$body-font;
+  color: base.$primary-color;
+
+  h1 {
+    font-family: base.$header-font;
+    font-size: 1.8rem;
+    margin-bottom: 3rem;
+    font-weight: 500;
+  }
+
+  p {
+    font-family: base.$body-font;
+    font-weight: 300;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    line-height: 1.5;
+    margin: auto;
+  }
+
+  .reach-us {
+    margin-top: 22px;
+
+    h2 {
+      font-family: base.$subheader1-font;
+      font-weight: 300;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.06rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        font-family: base.$body-font;
+        font-weight: 300;
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
+        line-height: 1.5;
+        margin: auto;
+        margin-bottom: 0.5rem;
+
+        a {
+          color: base.$secondary-color;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .message-us {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+
+    h2 {
+      font-family: base.$subheader1-font;
+      font-weight: 300;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.06rem;
+    }
+
+    h5 {
+      font-family: base.$subheader1-font;
+      font-weight: 300;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.06rem;
+    }
+
+    span {
+      font-family: base.$body-font;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.05rem;
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      font-family: base.$body-font;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.05rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .note {
+      font-family: base.$body-font;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.05rem;
+      line-height: 1.5;
+      margin-top: 1.4rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+
+      label {
+        font-family: base.$body-font;
+        font-weight: 400;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      input,
+      textarea {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid base.$primary-color;
+        font-family: base.$body-font;
+        font-size: 0.9rem;
+      }
+
+      button {
+        font-family: base.$body-font;
+        background-color: base.$primary-color;
+        color: #fff;
+        padding: 1em 2em;
+        border: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #acacac;
+          color: base.$tertiary-color;
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+}
