@@ -2,9 +2,14 @@ import React from "react";
 import type { Product } from "../types/product";
 import { cart } from "../data/products";
 import "../styles/CartList.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function CartList() {
-  
+  const navigate = useNavigate();
+  const handleGoToProduct = (e: React.MouseEvent) => {
+      e.preventDefault();
+      navigate("/shop");
+    };
 
   const formatCurrency = (amount: number): string | number => {
     try {
@@ -35,10 +40,11 @@ export default function CartList() {
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                 borderRadius: "8px",
               }}
+              onClick={handleGoToProduct}
             ></div>
             <div className="cart-item-info">
               <div className="info-section">
-                <h3 className="cart-item-name">{product.name}</h3>
+                <h3 className="cart-item-name" onClick={handleGoToProduct}>{product.name}</h3>
                 <p className="cart-item-price">
                   {formatCurrency(product.price)}
                 </p>
