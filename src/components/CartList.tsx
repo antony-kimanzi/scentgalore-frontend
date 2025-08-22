@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function CartList() {
   const navigate = useNavigate();
-  const handleGoToProduct = (e: React.MouseEvent) => {
+  const handleGoToProduct = (e: React.MouseEvent, id: number) => {
       e.preventDefault();
-      navigate("/shop");
+      navigate(`/product/${id}`);
     };
 
   const formatCurrency = (amount: number): string | number => {
@@ -40,11 +40,11 @@ export default function CartList() {
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                 borderRadius: "8px",
               }}
-              onClick={handleGoToProduct}
+              onClick={(e) => handleGoToProduct(e, product.id)}
             ></div>
             <div className="cart-item-info">
               <div className="info-section">
-                <h3 className="cart-item-name" onClick={handleGoToProduct}>{product.name}</h3>
+                <h3 className="cart-item-name" onClick={(e) => handleGoToProduct(e, product.id)}>{product.name}</h3>
                 <p className="cart-item-price">
                   {formatCurrency(product.price)}
                 </p>
