@@ -14,6 +14,11 @@ export default function Cart() {
     navigate("/shop");
   };
 
+  const handleGoToCheckout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate("/checkout");
+  };
+
   const formatCurrency = (amount: number): string | number => {
     try {
       return new Intl.NumberFormat("en-KE", {
@@ -47,12 +52,13 @@ export default function Cart() {
             </div>
             <div className="order-summary">
               <h2 className="summary-title">Order Summary</h2>
-              <div className="horizontal-line"></div>
+              <div className="hz-line"></div>
               <div className="cost-section"><span>Cost</span><span className="cost">{formatCurrency(cost)}</span></div>
               <div className="cost-section"><span>Shipping</span><span className="cost">{formatCurrency(0)}</span></div>
-              <div className="horizontal-line"></div>
+              <div className="hz-line"></div>
               <div className="ttl-section"><span>Estimated total</span><span>{formatCurrency(total(cost, shippingCost))}</span></div>
               <p>Taxes included. Discounts and shipping calculated at checkout.</p>
+              <button onClick={handleGoToCheckout}>Checkout</button>
             </div>
           </div>
         </>
