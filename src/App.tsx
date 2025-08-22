@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import SingleProduct from './pages/SingleProduct'
 import Contact from './pages/Contact'
+import Checkout from './pages/Checkout'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path ='/signup' element={<SignUp />} />
             <Route path = '/signin' element={<SignIn />} />
             <Route path = 'product/:id' element={<SingleProduct />} />
+            <Route path='/checkout' element={<Checkout />} />
           </Route>
         </Routes>
       </BrowserRouter>
