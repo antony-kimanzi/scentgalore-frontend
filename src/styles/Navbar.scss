@@ -36,6 +36,15 @@
       display: flex;
       gap: 1.5rem;
       margin-left: 3rem;
+
+      span {
+        font-family: base.$subheader2-font;
+        font-size: 0.7rem;
+        padding: 3rem;
+        background-color: base.$primary-color;
+        color: base.$tertiary-color;
+        border-radius: 25px;
+      }
     }
   }
 

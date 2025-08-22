@@ -4,7 +4,7 @@ import { featuredProducts } from "../data/products";
 import "../styles/FeaturedProducts.scss";
 
 export default function FeaturedProducts() {
-  const formatCurrency = (amount: number): string => {
+  const formatCurrency = (amount: number): string | number => {
     try {
       return new Intl.NumberFormat("en-KE", {
         style: "currency",

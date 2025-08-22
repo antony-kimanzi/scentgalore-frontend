@@ -1,9 +1,9 @@
 import React from "react";
 import type { Product } from "../types/product";
 import { products } from "../data/products";
-import '../styles/ProductsList.scss'
+import '../styles/ShopList.scss'
 
-export default function ProductsList() {
+export default function ShopList() {
   const formatCurrency = (amount: number): string => {
     try {
       return new Intl.NumberFormat("en-KE", {

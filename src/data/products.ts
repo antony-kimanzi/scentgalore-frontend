@@ -630,3 +630,40 @@ export const products: Product[] = [
     description: "Soft cotton flower with white musk and clean linen accord"
   }
 ];
+
+export const cart: Product[] = [
+  {
+    id: 1,
+    name: "Eau de Parfum Luxe sjjsdkdsdjksdlsdlsld",
+    price: 89.99,
+    imageUrl: "/image-1.jpg",
+    quantity: 5,
+    tone: "Floral"
+  },
+  {
+    id: 2,
+    name: "Citrus Zest",
+    price: 131,
+    imageUrl: "/image-2.jpg",
+    description: "Fresh and vibrant with orange, lemon, and bergamot notes",
+    quantity: 2,
+    tone: "Citrus"
+  },
+  {
+    id: 3,
+    name: "Midnight Oud",
+    price: 120.0,
+    imageUrl: "/image-3.jpg",
+    description: "Rich and woody with Arabian oud and spice accords",
+    quantity: 1,
+    tone: "Woody"
+  },
+  {
+    id: 4,
+    name: "Summer Breeze",
+    price: 55.25,
+    imageUrl: "/image-4.jpg",
+    quantity: 4,
+    tone: "Floral"
+  }
+]

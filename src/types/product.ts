@@ -4,4 +4,6 @@ export interface Product {
     price: number;
     imageUrl: string;
     description?: string;
+    quantity?: number;
+    tone?: string;
 }

@@ -1,22 +1,100 @@
 @use "../index" as base;
 
-.cart {
+.cart-page {
   width: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding:4rem 8rem;
+  padding: 4rem 8rem;
   background-color: base.$tertiary-color;
   font-family: base.$body-font;
   color: base.$primary-color;
 
+  .cart {
+    width: 100%;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+
+    .cart-items {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .order-summary {
+      width: 35%;
+      height: 400px;
+      padding: 2rem 4rem;
+      background-color: #e6e6e6;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .summary-title {
+        font-family: base.$subheader2-font;
+        font-size: 1.3rem;
+        letter-spacing: 0.05rem;
+        text-align: center;
+      }
+
+      .horizontal-line {
+        margin-bottom: 4px;
+    width: 100%;
+    height: 1px;
+    background-color: #bdbdbd;
+  }
+
+  .cost-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+    padding: 0 2rem;
+
+    span {
+      font-family: base.$subheader2-font;
+        font-size: 1.05rem;
+        letter-spacing: 0.05rem;
+    }
+
+    .cost {
+      font-family: base.$subheader1-font;
+        font-size: 1.05rem;
+        letter-spacing: 0.05rem;
+    }
+  }
+
+  .ttl-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+
+    span {
+      font-family: base.$subheader2-font;
+        font-size: 1.05rem;
+        letter-spacing: 0.05rem;
+    }
+  }
+
+  p {
+    margin: 1rem 0;
+    font-size: 0.8rem;
+  }
+    }
+  }
+
   h2 {
     font-family: base.$subheader1-font;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    letter-spacing: 0.1em;
-    font-weight: 400;
+      font-weight: 300;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+      color: base.$primary-color;
+      font-weight: 400;
   }
   button {
     font-family: base.$body-font;

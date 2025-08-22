@@ -2,12 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Menubar from "./Menubar";
 import Searchbar from "./Searchbar";
+import Cart from "../pages/Cart";
 import "../styles/Navbar.scss";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   const isMobile: boolean = window.innerWidth <= 768;
+  const cartItemNumber = (): number => {
+    if (Cart.length > 0) return Cart.length; else return 0;
+  }
 
+  const cartContent: number = cartItemNumber();
   const handleMenuClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -203,6 +208,7 @@ const Navbar: React.FC = () => {
                     ></path>
                   </g>
                 </svg>
+                {cartContent > 0 && (<span>{cartContent}</span>)}
               </Link>
             </div>
           </div>
