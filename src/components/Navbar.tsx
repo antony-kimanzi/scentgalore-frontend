@@ -148,7 +148,7 @@ const Navbar: React.FC = () => {
               Contact
             </Link>
             <div className="nav-icons">
-              <Link to={"/signin"}>
+              <Link to={"/signin"} className="sigin-link">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 32 32"
@@ -171,7 +171,7 @@ const Navbar: React.FC = () => {
                   ></path>
                 </svg>
               </Link>
-              <Link to={"/cart"}>
+              <Link to={"/cart"} className="cart-link">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

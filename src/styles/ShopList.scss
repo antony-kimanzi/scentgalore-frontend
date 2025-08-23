@@ -1,9 +1,9 @@
-@use '../index' as base;
+@use "../index" as base;
 
 .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(234.5px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(234.5px, 1fr));
+  gap: 30px;
   padding: 20px;
   width: 100%;
   background-color: base.$tertiary-color;
@@ -16,7 +16,7 @@
 
     &:hover {
       cursor: pointer;
-      transform: scale(1.05);
+      transform: scale(1.005);
     }
 
     .product-name {
@@ -37,6 +37,44 @@
       font-size: 1.1rem;
       color: base.$primary-color;
       margin-top: 16px;
+    }
+
+    .cart-item-quantity {
+      margin-top: 0.5rem;
+      gap: 3rem;
+
+      span {
+        font-family: base.$subheader1-font;
+        font-weight: 400;
+        font-size: 1rem;
+        font-style: italic;
+        color: base.$primary-color;
+        letter-spacing: 0.05rem;
+      }
+
+      .view-cart-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: base.$body-font;
+        color: base.$primary-color;
+        padding: 0.8em 1.2em;
+        border: none;
+        font-weight: 400;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        transition: all 0.5s ease-in-out;
+        text-decoration: none;
+
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.03);
+        }
+
+        svg {
+          stroke: #000;
+        }
+      }
     }
 
     .add-btn {
@@ -60,4 +98,3 @@
     }
   }
 }
-

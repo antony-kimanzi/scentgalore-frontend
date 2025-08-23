@@ -6,4 +6,5 @@ export interface Product {
     description?: string;
     quantity?: number;
     tone?: string;
+    stock?: string;
 }

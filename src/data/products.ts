@@ -188,7 +188,6 @@ export const products: Product[] = [
     name: "Summer Breeze",
     price: 55.25,
     imageUrl: "/image-4.jpg",
-    // description is optional
   },
   {
     id: 5,
@@ -344,7 +343,6 @@ export const products: Product[] = [
     name: "Summer Breeze",
     price: 55.25,
     imageUrl: "/image-4.jpg",
-    // description is optional
   },
   {
     id: 27,
@@ -500,7 +498,6 @@ export const products: Product[] = [
     name: "Summer Breeze",
     price: 55.25,
     imageUrl: "/image-4.jpg",
-    // description is optional
   },
   {
     id: 49,

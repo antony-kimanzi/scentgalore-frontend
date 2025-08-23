@@ -45,6 +45,17 @@
         color: base.$tertiary-color;
         border-radius: 25px;
       }
+
+      .cart-link {
+
+        svg {
+          stroke: base.$primary-color;
+
+          &:hover {
+            stroke: base.$secondary-color;
+          }
+        }
+      }
     }
   }
 
