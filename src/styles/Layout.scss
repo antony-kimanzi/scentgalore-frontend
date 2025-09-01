@@ -12,6 +12,12 @@
     margin-top: 132px; /* Adjusted for fixed navbar height */
 }
 
+.main-no-navbar {
+    width: 100%;
+}
+
 .main-no-footer {
     width: 100%;
+    height: 86vh;
+    margin-top: 132px; /* Adjusted for fixed navbar height */
 }

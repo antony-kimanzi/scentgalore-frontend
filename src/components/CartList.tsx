@@ -1,5 +1,5 @@
 import React from "react";
-import type { Product } from "../types/product";
+import type { Product } from "../utils/types";
 import { cart } from "../data/products";
 import "../styles/CartList.scss";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 export default function CartList() {
   const navigate = useNavigate();
   const handleGoToProduct = (e: React.MouseEvent, id: number) => {
-      e.preventDefault();
-      navigate(`/product/${id}`);
-    };
+    e.preventDefault();
+    navigate(`/product/${id}`);
+  };
 
   const formatCurrency = (amount: number): string | number => {
     try {
@@ -44,7 +44,12 @@ export default function CartList() {
             ></div>
             <div className="cart-item-info">
               <div className="info-section">
-                <h3 className="cart-item-name" onClick={(e) => handleGoToProduct(e, product.id)}>{product.name}</h3>
+                <h3
+                  className="cart-item-name"
+                  onClick={(e) => handleGoToProduct(e, product.id)}
+                >
+                  {product.name}
+                </h3>
                 <p className="cart-item-price">
                   {formatCurrency(product.price)}
                 </p>
@@ -85,15 +90,11 @@ export default function CartList() {
                 <div className="cart-item-quantity">
                   <span>Quantity: {product.quantity}</span>
                   <div className="quantity-controls">
-                    <button>
-                      -
-                    </button>
+                    <button>-</button>
                     <span className="quantity-value">
                       {product.quantity || 1}
                     </span>
-                    <button>
-                      +
-                    </button>
+                    <button>+</button>
                   </div>
                 </div>
               </div>

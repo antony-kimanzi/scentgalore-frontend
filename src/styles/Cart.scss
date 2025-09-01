@@ -83,6 +83,7 @@
       p {
         margin: 1rem 0;
         font-size: 0.8rem;
+        color: #707070;
       }
       button {
         margin: 0 2rem;
@@ -116,21 +117,25 @@
     font-weight: 400;
   }
   button {
+    align-items: center;
+    margin: 0 auto;
     font-family: base.$body-font;
     background-color: base.$primary-color;
     color: #fff;
     padding: 1em 2em;
     border: none;
+    border-radius: 2px;
     font-weight: 400;
     font-size: 1rem;
     letter-spacing: 0.1em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.5s ease-in-out;
 
     &:hover {
       cursor: pointer;
       background-color: #acacac;
-      color: base.$tertiary-color;
-      transform: scale(1.05);
+      color: base.$primary-color;
+      transform: scale(1.005);
     }
   }
 

@@ -1,7 +1,7 @@
 import React from "react";
-import type { Product } from "../types/product";
+import type { Product } from "../utils/types";
 import { products, cart } from "../data/products";
-import '../styles/ShopList.scss'
+import "../styles/ShopList.scss";
 import { Link } from "react-router-dom";
 
 export default function ShopList() {
@@ -18,7 +18,7 @@ export default function ShopList() {
     }
   };
   return (
-    <div className='products-grid'>
+    <div className="products-grid">
       {products.map((product: Product) => {
         const cartItem = cart.find((item: Product) => item.id === product.id);
         return (
@@ -52,12 +52,28 @@ export default function ShopList() {
                   </button>
                 </div> */}
                 <Link to="/cart" className="view-cart-btn">
-                  View Cart<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="-0.75 -0.75 16 16" stroke="#000000" aria-hidden="true" id="Arrow-Right--Streamline-Heroicons-Outline" height="16" width="16">
-  <desc>
-    Arrow Right Streamline Icon: https://streamlinehq.com
-  </desc>
-  <path stroke-linecap="round" stroke-linejoin="round" d="M8.15625 2.71875 12.6875 7.25m0 0 -4.53125 4.53125M12.6875 7.25H1.8125" stroke-width="1.5"></path>
-</svg></Link>
+                  View Cart
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="-0.75 -0.75 16 16"
+                    stroke="#000000"
+                    aria-hidden="true"
+                    id="Arrow-Right--Streamline-Heroicons-Outline"
+                    height="16"
+                    width="16"
+                  >
+                    <desc>
+                      Arrow Right Streamline Icon: https://streamlinehq.com
+                    </desc>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8.15625 2.71875 12.6875 7.25m0 0 -4.53125 4.53125M12.6875 7.25H1.8125"
+                      stroke-width="1.5"
+                    ></path>
+                  </svg>
+                </Link>
               </div>
             ) : (
               <button className="add-btn">Add to Cart</button>

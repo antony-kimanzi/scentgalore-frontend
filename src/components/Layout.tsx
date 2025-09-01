@@ -6,15 +6,17 @@ import '../styles/Layout.scss'
 const Layout: React.FC = () => {
   const location = useLocation();
   const hideRoutes = ['/signin', '/signup'] as const;
+  const hideCheckout = '/checkout' as const;
   const hideNavFooter = (hideRoutes as readonly string[]).includes(location.pathname);
+  const hideFooter = location.pathname.includes(hideCheckout);
 
   return (
     <div>
         {!hideNavFooter && <div className='navbar'><Navbar /></div>}
-        <main className={`${hideNavFooter ? 'main-no-footer' : 'main'}`}>
+        <main className={`${hideFooter ? 'main-no-footer' : `${hideNavFooter ? 'main-no-navbar' : 'main'}` }`}>
             <Outlet />
         </main>
-        {!hideNavFooter && <Footer />}
+        {hideFooter ? null : (!hideNavFooter && <Footer />)}
     </div>
   )
 }
