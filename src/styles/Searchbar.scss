@@ -1,30 +1,60 @@
 @use "../index" as base;
 
-input {
-  width: 420px;
-  border: none;
-  border-bottom: solid 1px #3d3d3d;
-  outline: none;
-  background: transparent;
-  color: base.$primary-color;
-  font-size: 16px;
-  font-family: base.$body-font;
-  flex-grow: 1;
+.searchbar-wrapper {
+  position: relative;
+  width: 100%;
+}
 
-  &::placeholder {
-    color: #575757;
-  }
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-input-container {
+  position: relative;
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 13px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: base.$body-font;
 
   &:focus {
-    border-bottom: solid 2.5px base.$primary-color;
+    outline: none;
+    border-color: #000;
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  padding: 5px;
+
+  &:hover {
+    color: #000;
   }
 }
 
 .search-button {
-  margin-left: 12px;
-  background-color: transparent;
+  background: none;
   border: none;
   cursor: pointer;
+  padding: 5px;
 
   svg {
     width: 20px;
@@ -34,5 +64,17 @@ input {
     &:hover {
       fill: base.$secondary-color;
     }
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// Mobile adjustments
+@media (max-width: 800px) {
+  .search-input {
+    padding: 8px 35px 8px 12px;
+    font-size: 14px;
   }
 }

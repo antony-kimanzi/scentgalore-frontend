@@ -1,23 +1,58 @@
-.navbar {
-    position:fixed;
+.page {
+  padding: 0;
+  margin: 0;
+  width: 100%; // Add this
+  max-width: 100%; // Add this
+
+  .navbar {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-}
+  }
 
-.main {
+  .main {
     width: 100%;
-    min-height: 58.4vh;
+    min-height: 58.8vh;
     margin-top: 132px; /* Adjusted for fixed navbar height */
-}
+    padding: 0;
+  }
 
-.main-no-navbar {
+  .main-no-navbar {
     width: 100%;
-}
+    min-height: 100vh; // Add this for full height
+  }
 
-.main-no-footer {
+  .main-no-footer {
     width: 100%;
     height: 86vh;
     margin-top: 132px; /* Adjusted for fixed navbar height */
+  }
+
+  .navbar-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .main-mobile {
+    width: 100%;
+    min-height: 68.8vh;
+    margin-top: 100px; /* Adjusted for fixed navbar height */
+    padding: 0;
+  }
+
+  .main-no-navbar-mobile {
+    width: 100%;
+    min-height: 100vh; // Add this for full height
+  }
+
+  .main-no-footer-mobile {
+    width: 100%;
+    height: 100vh;
+    margin-top: 70px; // Fixed: was 132px, should match mobile navbar height
+  }
 }

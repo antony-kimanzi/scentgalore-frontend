@@ -1,0 +1,285 @@
+// styles/AdminDashboard.scss
+.dashboard {
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #111;
+      margin: 0;
+    }
+
+    .date-range {
+      padding: 8px 12px;
+      border: 1px solid #e6e6e6;
+      border-radius: 4px;
+      background: white;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6;
+      }
+    }
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+
+    .metric-card {
+      background: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      padding: 20px;
+      transition: box-shadow 0.2s;
+
+      &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .metric-header {
+        margin-bottom: 12px;
+
+        .metric-title {
+          font-size: 14px;
+          color: #666;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+
+      .metric-value {
+        font-size: 32px;
+        font-weight: 600;
+        color: #111;
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+
+      .metric-subtitle {
+        font-size: 14px;
+        color: #999;
+        margin-top: 4px;
+      }
+
+      .metric-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #f0f0f0;
+
+        .detail {
+          span {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+          }
+
+          div {
+            font-size: 18px;
+            font-weight: 600;
+            color: #111;
+          }
+        }
+      }
+    }
+  }
+
+  .tables-section {
+    display: grid;
+    gap: 24px;
+
+    .table-container {
+      background: white;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      // overflow: hidden;
+
+      .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #e6e6e6;
+
+        h2 {
+          font-size: 18px;
+          font-weight: 600;
+          color: #111;
+          margin: 0;
+        }
+
+        .table-count {
+          background: #3b82f6;
+          color: white;
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        thead {
+          th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e6e6e6;
+            white-space: nowrap;
+          }
+        }
+
+        tbody {
+          tr {
+            border-bottom: 1px solid #f5f5f5;
+
+            &:last-child {
+              border-bottom: none;
+            }
+
+            &:hover {
+              background: #fafafa;
+            }
+
+            td {
+              padding: 16px 20px;
+              font-size: 14px;
+              color: #333;
+              white-space: nowrap;
+
+              &.order-id,
+              &.payment-id {
+                font-weight: 500;
+                color: #111;
+              }
+
+              &.amount {
+                font-weight: 600;
+                color: #111;
+              }
+
+              &.date,
+              &.receipt {
+                color: #666;
+                font-family:
+                  "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+                font-size: 13px;
+              }
+
+              .payment-method,
+              .status-badge {
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 500;
+              }
+
+              .payment-method {
+                background: #f3f4f6;
+                color: #374151;
+
+                &.mpesa {
+                  background: #dbeafe;
+                  color: #1e40af;
+                }
+
+                &.cash {
+                  background: #dcfce7;
+                  color: #166534;
+                }
+              }
+
+              .status-badge {
+                &.completed,
+                &.paid {
+                  background: #dcfce7;
+                  color: #166534;
+                }
+
+                &.pending {
+                  background: #fef3c7;
+                  color: #92400e;
+                }
+
+                &.processing {
+                  background: #dbeafe;
+                  color: #1e40af;
+                }
+
+                &.failed,
+                &.cancelled {
+                  background: #fee2e2;
+                  color: #991b1b;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dashboard-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+// Ensure dashboard tables are also scrollable
+.dashboard {
+  .tables-section {
+    .table-container {
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      position: relative;
+
+      table {
+        min-width: 900px !important;
+        width: 100% !important;
+
+        @media (max-width: 768px) {
+          min-width: 1000px !important;
+
+          thead th,
+          tbody td {
+            padding: 0.75rem !important;
+            font-size: 0.8rem !important;
+          }
+        }
+      }
+    }
+  }
+}

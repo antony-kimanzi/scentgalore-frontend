@@ -1,84 +1,198 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Menubar from "./Menubar";
 import Searchbar from "./Searchbar";
-import Cart from "../pages/Cart";
 import "../styles/Navbar.scss";
+import { useAuth } from "../hooks/useAuth";
+import { useCart } from "../hooks/useCart";
+import { useSearch } from "../hooks/useSearch";
 
 const Navbar: React.FC = () => {
+  const { user, silentCheckAuth, logout, isAuthenticated } = useAuth();
+  const { cartItems } = useCart();
+  const { isSearchOpen } = useSearch();
   const [open, setOpen] = React.useState<boolean>(false);
-  const isMobile: boolean = window.innerWidth <= 768;
-  const cartItemNumber = (): number => {
-    if (Cart.length > 0) return Cart.length; else return 0;
-  }
+  const [drop, setDrop] = React.useState<boolean>(false);
+  const [isMobile, setIsMobile] = React.useState<boolean>(
+    window.innerWidth <= 800
+  );
+  const location = useLocation();
+  const checkAuthTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
 
-  const cartContent: number = cartItemNumber();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  // Check if a link is active
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 800);
+      if (window.innerWidth > 800) {
+        setOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDrop(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close mobile menu when search opens
+  useEffect(() => {
+    if (isSearchOpen && open) {
+      setOpen(false);
+    }
+  }, [isSearchOpen, open]);
+
+  // Periodic auth check (every 5 minutes)
+  useEffect(() => {
+    const checkAuthPeriodically = () => {
+      silentCheckAuth().catch(console.error);
+    };
+
+    // Initial check
+    checkAuthPeriodically();
+
+    // Set up interval for periodic checks
+    checkAuthTimeoutRef.current = setInterval(
+      checkAuthPeriodically,
+      5 * 60 * 1000
+    );
+
+    return () => {
+      if (checkAuthTimeoutRef.current) {
+        clearInterval(checkAuthTimeoutRef.current);
+      }
+    };
+  }, [silentCheckAuth]);
+
+  // Check auth when location changes (for better UX)
+  useEffect(() => {
+    const checkAuthOnNavigation = () => {
+      // Debounce the check to avoid too many calls
+      if (checkAuthTimeoutRef.current) {
+        clearTimeout(checkAuthTimeoutRef.current);
+      }
+
+      checkAuthTimeoutRef.current = setTimeout(() => {
+        silentCheckAuth().catch(console.error);
+      }, 1000);
+    };
+
+    checkAuthOnNavigation();
+  }, [location, silentCheckAuth]);
+
   const handleMenuClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     e.stopPropagation();
-    // Toggle the open state
-    if (!open) setOpen(true);
-    else setOpen(false);
+    setOpen(!open);
   };
+
+  const handleLogoutBtn = async () => {
+    try {
+      await logout();
+      setDrop(false);
+    } catch (err) {
+      console.error("Logout failed: ", err);
+    }
+  };
+
+  const handleAccountClick = () => {
+    setDrop(false);
+    navigate("/account");
+  };
+
+  const handleSignInClick = () => {
+    navigate("/signin");
+  };
+
+  const handleCloseMobileMenu = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
       {isMobile ? (
         <>
           <div className="nav-mobile">
-            <img src="/nav-logo.png" alt="Logo" className="logo-mobile" />
+            <Link to="/" className="logo-link-mobile">
+              <img
+                src="https://res.cloudinary.com/dhnyfifkc/image/upload/nav-logo_ozc4bw.png"
+                alt="Logo"
+                className="logo-mobile"
+              />
+            </Link>
+
+            {/* Add Searchbar to mobile header */}
+            <div className="mobile-search-container">
+              <Searchbar />
+            </div>
+
             <div className="nav-icons">
-              <div className="search-icon-mobile">
+              <Link
+                to={"/cart"}
+                className={`cart-link ${isActive("/cart") ? "active" : ""}`}
+                onClick={handleCloseMobileMenu}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
                   viewBox="0 0 30 30"
-                  fill="#000000"
-                  id="Magnifying-Glass--Streamline-Phosphor"
+                  id="Shopping-Bag-Check--Streamline-Ultimate"
                   height="30"
                   width="30"
                 >
                   <desc>
-                    Magnifying Glass Streamline Icon: https://streamlinehq.com
+                    Shopping Bag Check Streamline Icon: https://streamlinehq.com
                   </desc>
                   <path
-                    d="m23.495184375 22.2165375 -5.655628125 -5.65449375c4.90333125 -5.886759375 1.5953062500000001 -14.874 -5.954446875 -16.17703125C4.335365625 -0.918009375 -1.7938031250000002 6.4404375 0.85261875 13.630228125000002c2.3755875 6.454012499999999 10.425093749999998 8.6108625 15.709425000000001 4.209328125000001l5.65449375 5.655628125c0.49215 0.49215 1.332515625 0.266971875 1.51265625 -0.40530937499999997 0.08360625000000001 -0.31201875 -0.005596875 -0.644925 -0.23400937500000002 -0.8733375ZM2.07225 10.204968749999999c0 -6.260568749999999 6.777262500000001 -10.17343125 12.199078125 -7.0431375 5.4218062499999995 3.1302843749999996 5.4218062499999995 10.955990625 0 14.086275 -1.2362250000000001 0.7137375 -2.63889375 1.089515625 -4.066359374999999 1.08958125 -4.489509375 -0.0049875 -8.127740625 -3.643209375 -8.132718749999999 -8.132718749999999Z"
-                    strokeWidth="0.0938"
+                    stroke="#000000"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.049 6.75019H4.93604c-0.3389 -0.01382 -0.67129 0.09586 -0.93541 0.30866 -0.26412 0.2128 -0.442 0.51426 -0.50059 0.84834l-2 13.91501c-0.01036 0.191 0.01979 0.3821 0.08846 0.5606 0.06868 0.1786 0.17433 0.3406 0.31002 0.4754 0.1357 0.1349 0.29837 0.2395 0.47735 0.307 0.17898 0.0676 0.37022 0.0965 0.56117 0.085H21.048c0.1909 0.0116 0.3821 -0.0174 0.5611 -0.0849 0.1789 -0.0676 0.3415 -0.1723 0.4771 -0.3071 0.1357 -0.1349 0.2412 -0.2969 0.3098 -0.4755 0.0685 -0.1785 0.0985 -0.3695 0.088 -0.5605l-2 -13.91501c-0.0585 -0.33391 -0.2363 -0.63522 -0.5002 -0.848 -0.2639 -0.21278 -0.596 -0.32258 -0.9348 -0.309Z"
+                    strokeWidth="1.5"
+                  ></path>
+                  <path
+                    stroke="#000000"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.662 3.807c-0.1642 -0.85808 -0.6218 -1.63231 -1.2943 -2.19003 -0.6725 -0.55773 -1.518 -0.864224 -2.3917 -0.86697 -0.8693 0.003813 -1.7105 0.30852 -2.38064 0.86234 -0.67013 0.55382 -1.12782 1.32259 -1.29531 2.17566"
+                    strokeWidth="1.5"
+                  ></path>
+                  <path
+                    stroke="#000000"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m14.6529 13.5 -3.52 4.693 -2.14096 -2.14"
+                    strokeWidth="1.5"
                   ></path>
                 </svg>
-              </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 30 30"
-                id="Shopping-Bag-Check--Streamline-Ultimate"
-                height="30"
-                width="30"
-              >
-                <desc>
-                  Shopping Bag Check Streamline Icon: https://streamlinehq.com
-                </desc>
-                <path
-                  stroke="#000000"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.049 6.75019H4.93604c-0.3389 -0.01382 -0.67129 0.09586 -0.93541 0.30866 -0.26412 0.2128 -0.442 0.51426 -0.50059 0.84834l-2 13.91501c-0.01036 0.191 0.01979 0.3821 0.08846 0.5606 0.06868 0.1786 0.17433 0.3406 0.31002 0.4754 0.1357 0.1349 0.29837 0.2395 0.47735 0.307 0.17898 0.0676 0.37022 0.0965 0.56117 0.085H21.048c0.1909 0.0116 0.3821 -0.0174 0.5611 -0.0849 0.1789 -0.0676 0.3415 -0.1723 0.4771 -0.3071 0.1357 -0.1349 0.2412 -0.2969 0.3098 -0.4755 0.0685 -0.1785 0.0985 -0.3695 0.088 -0.5605l-2 -13.91501c-0.0585 -0.33391 -0.2363 -0.63522 -0.5002 -0.848 -0.2639 -0.21278 -0.596 -0.32258 -0.9348 -0.309Z"
-                  strokeWidth="1.5"
-                ></path>
-                <path
-                  stroke="#000000"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.662 3.807c-0.1642 -0.85808 -0.6218 -1.63231 -1.2943 -2.19003 -0.6725 -0.55773 -1.518 -0.864224 -2.3917 -0.86697 -0.8693 0.003813 -1.7105 0.30852 -2.38064 0.86234 -0.67013 0.55382 -1.12782 1.32259 -1.29531 2.17566"
-                  strokeWidth="1.5"
-                ></path>
-                <path
-                  stroke="#000000"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m14.6529 13.5 -3.52 4.693 -2.14096 -2.14"
-                  strokeWidth="1.5"
-                ></path>
-              </svg>
-              <div onClick={(e) => handleMenuClick(e)}>
+                {cartItems?.length > 0 && (
+                  <span className="cart-number">{cartItems.length}</span>
+                )}
+              </Link>
+
+              <div onClick={handleMenuClick} className="menu-icon">
                 {open ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -129,49 +243,129 @@ const Navbar: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="menu">{open && <Menubar />}</div>
+          {open && (
+            <div className="mobile-menu-container">
+              <Menubar
+                setOpen={setOpen}
+                isAuthenticated={isAuthenticated}
+                user={user}
+                onLogout={handleLogoutBtn}
+                onAccountClick={handleAccountClick}
+                onSignInClick={handleSignInClick}
+              />
+            </div>
+          )}
         </>
       ) : (
         <div className="nav">
-          <img src="/nav-logo.png" alt="Logo" className="logo" />
-          <div className="search-icon">
+          <Link to="/" className="logo-link">
+            <img
+              src="https://res.cloudinary.com/dhnyfifkc/image/upload/nav-logo_ozc4bw.png"
+              alt="Logo"
+              className="logo"
+            />
+          </Link>
+          <div className="search-container">
             <Searchbar />
           </div>
           <div className="nav-links">
-            <Link to="/" className="nav-link">
+            <Link
+              to="/"
+              className={`nav-link ${isActive("/") ? "active" : ""}`}
+            >
               Home
             </Link>
-            <Link to="/shop" className="nav-link">
+            <Link
+              to="/shop"
+              className={`nav-link ${isActive("/shop") ? "active" : ""}`}
+            >
               Shop
             </Link>
-            <Link to="/contact" className="nav-link">
+            <Link
+              to="/contact"
+              className={`nav-link ${isActive("/contact") ? "active" : ""}`}
+            >
               Contact
             </Link>
             <div className="nav-icons">
-              <Link to={"/signin"} className="sigin-link">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  fill="#000000"
-                  id="User-Circle-Gear--Streamline-Phosphor"
-                  height="32"
-                  width="32"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.location.href = "/signin";
-                  }}
-                >
-                  <desc>
-                    User Circle Gear Streamline Icon: https://streamlinehq.com
-                  </desc>
-                  <path
-                    d="m30.8100125 6.6958375 -0.6898375 -0.3982125c0.080925 -0.428475 0.080925 -0.8683125 0 -1.296775l0.6898375 -0.3982125c0.789725 -0.4558375 0.78985 -1.595625 0.000225 -2.051625 -0.3664625 -0.2116375 -0.8179875 -0.2116875 -1.1845 -0.0001375l-0.6913125 0.3997c-0.33085 -0.28385 -0.7112625 -0.5041625 -1.1221 -0.649875v-0.796425c-0.0009375 -0.91165 -0.988425 -1.480425 -1.777475 -1.0237875 -0.3654375 0.2114875 -0.59065 0.60155 -0.591075 1.0237875v0.796425c-0.41085 0.1457125 -0.7912625 0.366025 -1.1221 0.649875l-0.691325 -0.3997c-0.789725 -0.455825 -1.77675 0.114175 -1.7766375 1.0260125 0.0000375 0.4231875 0.22585 0.8141875 0.5923625 1.02575l0.6898375 0.3982125c-0.080925 0.4284625 -0.080925 0.8683 0 1.296775l-0.6898375 0.3982125c-0.789725 0.455475 -0.7902375 1.5950375 -0.000925 2.051225 0.1802875 0.1041875 0.3848375 0.1590125 0.5930625 0.158925 0.2079375 0.00065 0.4123 -0.054025 0.5921375 -0.1584l0.691325 -0.3996875c0.3308375 0.28385 0.71125 0.5041625 1.1221 0.649875v0.796425c0.0009375 0.91165 0.9884125 1.480425 1.7774625 1.0237875 0.36545 -0.2115 0.59065 -0.6015625 0.5910875 -1.0237875v-0.796425c0.4108375 -0.1457125 0.79125 -0.366025 1.1221 -0.649875l0.6913125 0.3996875c0.1798375 0.104375 0.3842 0.15905 0.5921375 0.1584 0.9116625 0.0003625 1.481825 -0.9863125 1.0263 -1.7760125 -0.1040375 -0.1803625 -0.2537875 -0.3301125 -0.4341625 -0.4341375Zm-5.3662375 -1.0466c0 -0.9116625 0.9868875 -1.4814375 1.7764125 -1.0256125 0.7895125 0.455825 0.7895125 1.5954 0 2.051225 -0.180025 0.103925 -0.384275 0.15865 -0.5921375 0.1586625 -0.6540875 0.000025 -1.184275 -0.5302 -1.184275 -1.184275Zm4.3448 7.121925c-0.64505 0.10795 -1.080475 0.7183375 -0.9725875 1.3634 0.12025 0.7181375 0.1806625 1.4450125 0.1806125 2.1731375 0.0028 3.18895 -1.16925 6.267175 -3.2922875 8.6466875 -1.3208125 -1.9139625 -3.178025 -3.3947 -5.3381125 -4.2559875 4.2971 -3.3845125 3.31895 -10.1516 -1.7606875 -12.18075 -5.0796375 -2.0291375 -10.451025 2.2015 -9.6685 7.615175 0.2607 1.8035625 1.2043625 3.438025 2.63595 4.565575 -2.1601 0.8612875 -4.0173125 2.342025 -5.338125 4.2559875C-0.4213875 17.45375 3.53815 5.560275 13.3620125 3.5461375c0.85805 -0.1759125 1.7316625 -0.26485 2.6075625 -0.26545 0.7281375 -0.0001125 1.4550125 0.0602875 2.17315 0.1806 0.9005125 0.1420375 1.6171 -0.7440375 1.28985 -1.5949375 -0.14905 -0.3875375 -0.490175 -0.6687125 -0.89905 -0.7410375 -11.6783 -1.964625 -21.1039875 9.449625 -16.96625 20.5456375 4.13775 11.0960125 18.7356125 13.551775 26.276175 4.420375 2.841625 -3.441125 4.048875 -7.94665 3.308525 -12.347575 -0.10795 -0.64505 -0.7183375 -1.080475 -1.3634 -0.9725875ZM11.232475 15.123425c0 -3.6466125 3.9475875 -5.92575 7.10565 -4.1024375 3.1580625 1.8233 3.1580625 6.381575 0 8.2048875 -0.720075 0.4157375 -1.5370875 0.6346125 -2.36855 0.63465 -2.6163125 0.000125 -4.7371 -2.1207875 -4.7371 -4.7371Zm-3.2449125 11.4726625c3.726 -5.8273125 12.238025 -5.8273125 15.964025 0 -4.694975 3.651375 -11.26905 3.651375 -15.964025 0Z"
-                    strokeWidth="0.125"
-                  ></path>
-                </svg>
-              </Link>
-              <Link to={"/cart"} className="cart-link">
+              {isAuthenticated && user ? (
+                <div className="user-section" ref={dropdownRef}>
+                  <span className="welcome-text">Hello, {user.username}</span>
+                  <div className="account-dropdown">
+                    <div
+                      className="dropdown-trigger"
+                      onClick={() => setDrop(!drop)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          setDrop(!drop);
+                        }
+                      }}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 32 32"
+                        fill="#000000"
+                        id="User-Circle-Gear--Streamline-Phosphor"
+                        height="32"
+                        width="32"
+                      >
+                        <desc>
+                          User Circle Gear Streamline Icon:
+                          https://streamlinehq.com
+                        </desc>
+                        <path
+                          d="m30.8100125 6.6958375 -0.6898375 -0.3982125c0.080925 -0.428475 0.080925 -0.8683125 0 -1.296775l0.6898375 -0.3982125c0.789725 -0.4558375 0.78985 -1.595625 0.000225 -2.051625 -0.3664625 -0.2116375 -0.8179875 -0.2116875 -1.1845 -0.0001375l-0.6913125 0.3997c-0.33085 -0.28385 -0.7112625 -0.5041625 -1.1221 -0.649875v-0.796425c-0.0009375 -0.91165 -0.988425 -1.480425 -1.777475 -1.0237875 -0.3654375 0.2114875 -0.59065 0.60155 -0.591075 1.0237875v0.796425c-0.41085 0.1457125 -0.7912625 0.366025 -1.1221 0.649875l-0.691325 -0.3997c-0.789725 -0.455825 -1.77675 0.114175 -1.7766375 1.0260125 0.0000375 0.4231875 0.22585 0.8141875 0.5923625 1.02575l0.6898375 0.3982125c-0.080925 0.4284625 -0.080925 0.8683 0 1.296775l-0.6898375 0.3982125c-0.789725 0.455475 -0.7902375 1.5950375 -0.000925 2.051225 0.1802875 0.1041875 0.3848375 0.1590125 0.5930625 0.158925 0.2079375 0.00065 0.4123 -0.054025 0.5921375 -0.1584l0.691325 -0.3996875c0.3308375 0.28385 0.71125 0.5041625 1.1221 0.649875v0.796425c0.0009375 0.91165 0.9884125 1.480425 1.7774625 1.0237875 0.36545 -0.2115 0.59065 -0.6015625 0.5910875 -1.0237875v-0.796425c0.4108375 -0.1457125 0.79125 -0.366025 1.1221 -0.649875l0.6913125 0.3996875c0.1798375 0.104375 0.3842 0.15905 0.5921375 0.1584 0.9116625 0.0003625 1.481825 -0.9863125 1.0263 -1.7760125 -0.1040375 -0.1803625 -0.2537875 -0.3301125 -0.4341625 -0.4341375Zm-5.3662375 -1.0466c0 -0.9116625 0.9868875 -1.4814375 1.7764125 -1.0256125 0.7895125 0.455825 0.7895125 1.5954 0 2.051225 -0.180025 0.103925 -0.384275 0.15865 -0.5921375 0.1586625 -0.6540875 0.000025 -1.184275 -0.5302 -1.184275 -1.184275Zm4.3448 7.121925c-0.64505 0.10795 -1.080475 0.7183375 -0.9725875 1.3634 0.12025 0.7181375 0.1806625 1.4450125 0.1806125 2.1731375 0.0028 3.18895 -1.16925 6.267175 -3.2922875 8.6466875 -1.3208125 -1.9139625 -3.178025 -3.3947 -5.3381125 -4.2559875 4.2971 -3.3845125 3.31895 -10.1516 -1.7606875 -12.18075 -5.0796375 -2.0291375 -10.451025 2.2015 -9.6685 7.615175 0.2607 1.8035625 1.2043625 3.438025 2.63595 4.565575 -2.1601 0.8612875 -4.0173125 2.342025 -5.338125 4.2559875C-0.4213875 17.45375 3.53815 5.560275 13.3620125 3.5461375c0.85805 -0.1759125 1.7316625 -0.26485 2.6075625 -0.26545 0.7281375 -0.0001125 1.4550125 0.0602875 2.17315 0.1806 0.9005125 0.1420375 1.6171 -0.7440375 1.28985 -1.5949375 -0.14905 -0.3875375 -0.490175 -0.6687125 -0.89905 -0.7410375 -11.6783 -1.964625 -21.1039875 9.449625 -16.96625 20.5456375 4.13775 11.0960125 18.7356125 13.551775 26.276175 4.420375 2.841625 -3.441125 4.048875 -7.94665 3.308525 -12.347575 -0.10795 -0.64505 -0.7183375 -1.080475 -1.3634 -0.9725875ZM11.232475 15.123425c0 -3.6466125 3.9475875 -5.92575 7.10565 -4.1024375 3.1580625 1.8233 3.1580625 6.381575 0 8.2048875 -0.720075 0.4157375 -1.5370875 0.6346125 -2.36855 0.63465 -2.6163125 0.000125 -4.7371 -2.1207875 -4.7371 -4.7371Zm-3.2449125 11.4726625c3.726 -5.8273125 12.238025 -5.8273125 15.964025 0 -4.694975 3.651375 -11.26905 3.651375 -15.964025 0Z"
+                          strokeWidth="0.125"
+                        ></path>
+                      </svg>
+                      <svg
+                        viewBox="0 0 22 22"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        id="Chevron-Down--Streamline-Radix"
+                        height="22"
+                        width="22"
+                        className={`chevron ${drop ? "rotate" : ""}`}
+                      >
+                        <desc>
+                          Chevron Down Streamline Icon: https://streamlinehq.com
+                        </desc>
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M4.598337333333333 9.031777333333332c0.27700933333333333 -0.29547466666666666 0.741092 -0.31043466666666664 1.036552 -0.03344L11 14.028138666666667l5.365066666666666 -5.0298013333333325c0.2955333333333333 -0.27699466666666667 0.7595866666666666 -0.2620346666666667 1.03664 0.03344 0.27690666666666663 0.29547466666666666 0.26194666666666666 0.7595573333333333 -0.03344 1.036552L11.501555999999999 15.568373333333334c-0.282084 0.26443999999999995 -0.7210279999999999 0.26443999999999995 -1.003112 0l-5.866666666666666 -5.500044c-0.29547466666666666 -0.27699466666666667 -0.31043466666666664 -0.7410773333333333 -0.03344 -1.036552Z"
+                          fill="#000000"
+                          strokeWidth="1.4667"
+                        ></path>
+                      </svg>
+                    </div>
+                    <div className={`dropdown-content ${drop ? "show" : ""}`}>
+                      <button
+                        className={`dropdown-item ${isActive("/account") ? "active" : ""}`}
+                        onClick={handleAccountClick}
+                      >
+                        Account
+                      </button>
+                      <button
+                        className="dropdown-item"
+                        onClick={handleLogoutBtn}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <button className="signin-btn" onClick={handleSignInClick}>
+                  Sign in
+                </button>
+              )}
+              <Link
+                to={"/cart"}
+                className={`cart-link ${isActive("/cart") ? "active" : ""}`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -179,11 +373,6 @@ const Navbar: React.FC = () => {
                   id="Shopping-Bag-Hand-Bag-2--Streamline-Core"
                   height="32"
                   width="32"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.location.href = "/cart";
-                  }}
                 >
                   <desc>
                     Shopping Bag Hand Bag 2 Streamline Icon:
@@ -208,7 +397,9 @@ const Navbar: React.FC = () => {
                     ></path>
                   </g>
                 </svg>
-                {cartContent > 0 && (<span>{cartContent}</span>)}
+                {cartItems?.length > 0 && (
+                  <span className="cart-number">{cartItems.length}</span>
+                )}
               </Link>
             </div>
           </div>

@@ -1,38 +1,59 @@
-@use '../index' as base;
+@use "../index" as base;
 
 .shop {
   width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 2.5rem 10rem;
   background-color: base.$tertiary-color;
   font-family: base.$body-font;
-  color: base.$primary-color;
 
-  
-  h1 {
-    font-family: base.$header-font;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-  }
+  .header-section {
+    text-align: center;
+    padding: 40px 20px 20px;
 
-  h3 {
-    font-family: base.$subheader1-font;
-      font-weight: 300;
-      font-size: 1.7rem;
-      letter-spacing: 0.08em;
-      margin-bottom: 1.5rem;
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
       color: base.$primary-color;
+      margin-bottom: 10px;
+      text-transform: lowercase;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      color: rgba(base.$primary-color, 0.7);
       font-weight: 400;
+    }
   }
 
-  .product-section {
-    width: 100%;
-    padding: 2.5rem 10rem;
-    background-color: base.$tertiary-color;
-    font-family: base.$body-font;
+  .products-section {
+    padding: 0 20px 20px;
+  }
+}
+
+.shop-mobile {
+  width: 100%;
+  background-color: base.$tertiary-color;
+  font-family: base.$body-font;
+
+  .header-section-mobile {
+    text-align: center;
+    padding: 30px 15px 15px;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: base.$primary-color;
+      margin-bottom: 8px;
+      text-transform: lowercase;
+    }
+
+    h3 {
+      font-size: 1rem;
+      color: rgba(base.$primary-color, 0.7);
+      font-weight: 400;
+    }
+  }
+
+  .products-section-mobile {
+    padding: 15px;
   }
 }

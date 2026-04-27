@@ -1,100 +1,256 @@
 @use "../index" as base;
+@use "sass:color";
 
+// Products info styling
+.products-info {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(base.$primary-color, 0.1);
+
+  .products-count {
+    font-size: 0.9rem;
+    color: rgba(base.$primary-color, 0.6);
+    margin: 0;
+  }
+}
+
+// Common styles for both desktop and mobile
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .product-image-container {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-tone-preview {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: base.$primary-color;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .product-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .product-name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: base.$primary-color;
+    line-height: 1.3;
+  }
+
+  .gender-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 8px;
+    margin-left: 0.5rem;
+    color: base.$primary-color;
+  }
+
+  .product-description {
+    font-size: 0.7rem;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: rgba(base.$primary-color, 0.7);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .product-price {
+    font-family: base.$subheader2-font;
+    font-size: 1rem;
+    color: base.$primary-color;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+
+  .button-container {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid rgba(base.$primary-color, 0.1);
+  }
+
+  .cart-item-quantity {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+    span {
+      font-family: base.$subheader1-font;
+      font-weight: 400;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: rgba(base.$primary-color, 0.7);
+      letter-spacing: 0.05rem;
+    }
+
+    .view-cart-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: base.$body-font;
+      font-weight: 500;
+      color: base.$primary-color;
+      padding: 0.8em 1.2em;
+      width: 100%;
+      background-color: transparent;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      transition: all 0.5s ease-in-out;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: base.$primary-color;
+        color: #fff;
+        transform: scale(1.02);
+      }
+
+      svg {
+        stroke: currentColor;
+      }
+    }
+  }
+
+  .add-btn {
+    width: 100%;
+    background-color: transparent;
+    color: base.$primary-color;
+    padding: 0.8em 1.2em;
+    border: solid 2px base.$primary-color;
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    transition: all 0.5s ease-in-out;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: base.$primary-color;
+      color: #fff;
+      transform: scale(1.02);
+    }
+
+    &.adding {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Products grid - Single responsive grid only
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(234.5px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
   padding: 20px;
   width: 100%;
   background-color: base.$tertiary-color;
   font-family: base.$body-font;
 
   .product-card {
-    padding: 20px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    width: 100%;
+    padding: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
 
     &:hover {
       cursor: pointer;
-      transform: scale(1.005);
-    }
-
-    .product-name {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-top: 20px;
-      color: base.$primary-color;
-    }
-
-    .product-description {
-      font-size: 0.9rem;
-      font-weight: 300;
-      margin-top: 5px;
-    }
-
-    p {
-      font-family: base.$subheader2-font;
-      font-size: 1.1rem;
-      color: base.$primary-color;
-      margin-top: 16px;
-    }
-
-    .cart-item-quantity {
-      margin-top: 0.5rem;
-      gap: 3rem;
-
-      span {
-        font-family: base.$subheader1-font;
-        font-weight: 400;
-        font-size: 1rem;
-        font-style: italic;
-        color: base.$primary-color;
-        letter-spacing: 0.05rem;
-      }
-
-      .view-cart-btn {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: base.$body-font;
-        color: base.$primary-color;
-        padding: 0.8em 1.2em;
-        border: none;
-        font-weight: 400;
-        font-size: 0.9rem;
-        letter-spacing: 0.1em;
-        transition: all 0.5s ease-in-out;
-        text-decoration: none;
-
-        &:hover {
-          cursor: pointer;
-          transform: scale(1.03);
-        }
-
-        svg {
-          stroke: #000;
-        }
-      }
-    }
-
-    .add-btn {
-      width: 100%;
-      margin-top: 10px;
-      background-color: transparent;
-      color: base.$primary-color;
-      padding: 0.8em 1.2em;
-      border: solid 2px base.$primary-color;
-      font-weight: 400;
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      transition: all 0.5s ease-in-out;
-
-      &:hover {
-        cursor: pointer;
-        background-color: base.$primary-color;
-        color: #fff;
-        transform: scale(1.05);
-      }
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
   }
 }
+
+// RESPONSIVE BREAKPOINTS - CRITICAL!
+// Mobile-first approach
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr) !important; // Force 2 columns
+    gap: 15px;
+    padding: 15px;
+
+    .product-card {
+      // Ensure proper sizing on mobile
+      min-width: 0;
+    }
+
+    .product-content {
+      padding: 15px;
+    }
+
+    .product-description {
+      font-size: 0.65rem; // Smaller text on mobile
+    }
+
+    .product-image-container {
+      height: 180px;
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1400px) {
+  .products-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1401px) {
+  .products-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+// For very small screens
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr; // 1 per row on very small screens
+  }
+}
+
+// ... rest of your existing styles (loading, error, etc.) remain the same

@@ -3,5 +3,12 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2017",
+    "paths": {
+      "axios": ["./node_modules/axios/index.d.ts"]
+    }
+  }
 }

@@ -1,0 +1,110 @@
+@use "../index" as base;
+
+.shop-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(base.$primary-color, 0.1);
+  font-family: base.$body-font;
+
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(base.$primary-color, 0.2);
+    border-radius: 8px;
+    background-color: white;
+    color: base.$primary-color;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(.disabled) {
+      background-color: rgba(base.$primary-color, 0.1);
+      border-color: base.$primary-color;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .pagination-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .page-numbers {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    .page-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 10px;
+      border: 1px solid rgba(base.$primary-color, 0.2);
+      border-radius: 8px;
+      background-color: white;
+      color: base.$primary-color;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(base.$primary-color, 0.1);
+        border-color: base.$primary-color;
+      }
+
+      &.active {
+        background-color: base.$primary-color;
+        color: white;
+        border-color: base.$primary-color;
+      }
+    }
+
+    .page-dots {
+      color: rgba(base.$primary-color, 0.5);
+      padding: 0 10px;
+    }
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .shop-pagination {
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .page-numbers {
+      order: 1;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 15px;
+
+      .page-btn {
+        min-width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .pagination-btn {
+      width: 35px;
+      height: 35px;
+
+      .pagination-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

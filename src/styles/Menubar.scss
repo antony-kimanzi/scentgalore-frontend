@@ -1,7 +1,159 @@
-@use '../index' as base;
+@use "../index" as base;
 
-.menu {
+.menubar {
+  .menu {
     color: base.$primary-color;
     background-color: base.$tertiary-color;
-    padding: 1.6rem 8rem;
+    border-left: 1px solid grey;
+    width: 100%;
+    height: auto;
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 0;
+      font-size: 17px;
+      font-weight: 400;
+      color: base.$primary-color;
+      border-bottom: solid 1px grey;
+      text-decoration: none;
+      font-family: base.$body-font;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      &.active {
+        background-color: base.$secondary-color;
+        color: white;
+        font-weight: 500;
+
+        &:hover {
+          background-color: rgba(base.$secondary-color, 0.1);
+        }
+      }
+    }
+
+    .auth-section {
+      margin-top: 0.5rem;
+
+      .user-info-mobile {
+        padding: 1rem;
+        text-align: center;
+        border-bottom: solid 1px grey;
+        background-color: rgba(0, 0, 0, 0.05);
+
+        .welcome-text-mobile {
+          font-family: base.$subheader2-font;
+          font-size: 1rem;
+          font-weight: 500;
+          color: base.$primary-color;
+        }
+      }
+
+      .btn-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+
+        .account-btn {
+          width: 100%;
+          background-color: #fff;
+          color: rgb(0, 0, 0);
+          padding: 0.8rem 0;
+          border: solid 1px #ddd;
+          font-family: base.$body-font;
+          font-weight: 500;
+          font-size: 17px;
+          transition: all 0.3s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+
+          &.active {
+            background-color: base.$secondary-color;
+            color: white;
+            border-color: base.$secondary-color;
+
+            &:hover {
+              background-color: rgba(base.$secondary-color, 0.1);
+            }
+          }
+        }
+
+        .logout-btn {
+          width: 100%;
+          background-color: base.$primary-color;
+          color: white;
+          padding: 0.8rem 0;
+          border: none;
+          font-family: base.$body-font;
+          font-weight: 500;
+          font-size: 17px;
+          transition: all 0.3s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+          }
+        }
+      }
+
+      .signin-btn {
+        width: 100%;
+        background-color: base.$secondary-color;
+        color: white;
+        padding: 0.8rem 0;
+        border: none;
+        font-family: base.$body-font;
+        font-weight: 500;
+        font-size: 17px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          background-color: rgba(base.$secondary-color, 0.1);
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 480px) {
+  .menubar {
+    .menu {
+      .nav-link {
+        padding: 0.6rem 0;
+        font-size: 16px;
+      }
+
+      .auth-section {
+        .user-info-mobile {
+          padding: 0.8rem;
+
+          .welcome-text-mobile {
+            font-size: 0.9rem;
+          }
+        }
+
+        .btn-section {
+          .account-btn,
+          .logout-btn {
+            padding: 0.7rem 0;
+            font-size: 16px;
+          }
+        }
+
+        .signin-btn {
+          padding: 0.7rem 0;
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }

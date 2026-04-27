@@ -73,6 +73,7 @@
 }
 
 .footer-mobile {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -84,7 +85,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px;
     margin-bottom: 1.6rem;
 
     .logo-mobile {
@@ -139,7 +139,7 @@
     .horizontal-line-mobile {
       width: 300px;
       border-top: 1px solid #555555;
-      margin: 20px 0;
+      margin:5px auto;
     }
   }
 }

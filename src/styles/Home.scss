@@ -21,14 +21,28 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: url("/4.jpg") no-repeat;
+    background: url("https://res.cloudinary.com/dhnyfifkc/image/upload/landing-image_wlm4ae.jpg")
+      no-repeat;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    isolation: isolate;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
 
     .landing-text {
       padding: 2rem;
       color: #fff;
+      z-index: 1;
 
       h1 {
         font-family: base.$header-font;
@@ -62,6 +76,7 @@
       font-size: 1rem;
       letter-spacing: 0.1em;
       transition: all 0.5s ease-in-out;
+      z-index: 1;
 
       &:hover {
         cursor: pointer;
@@ -117,7 +132,151 @@
     p {
       font-family: base.$body-font;
       font-weight: 300;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+  }
+}
+
+.home-mobile {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  background-color: base.$tertiary-color;
+  font-family: base.$body-font;
+  color: base.$primary-color;
+
+  .landing-mobile {
+    width: 100%;
+    height: 400px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url("https://res.cloudinary.com/dhnyfifkc/image/upload/landing-image_wlm4ae.jpg")
+      no-repeat;
+    background-size: auto;
+    background-position: center;
+    isolation: isolate;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .landing-text-mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      color: #fff;
+      z-index: 1;
+
+      h1 {
+        font-family: base.$header-font;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      p {
+        font-family: base.$subheader1-font;
+        font-weight: 300;
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+        line-height: 1.5;
+      }
+
+      span {
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: base.$secondary-color;
+      }
+    }
+
+    .shop-btn-mobile {
+      background-color: transparent;
+      color: #fff;
+      padding: 1em 2em;
+      border: solid 2px #fff;
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      transition: all 0.5s ease-in-out;
+      z-index: 1;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #fff;
+        color: base.$secondary-color;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .featured-products-mobile {
+    width: 100%;
+    padding: 2rem;
+    background-color: base.$tertiary-color;
+    font-family: base.$body-font;
+
+    h2 {
+      font-family: base.$subheader2-font;
+      font-weight: 300;
+      font-size: 1.7rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: base.$primary-color;
+      font-weight: 300;
+    }
+
+    .products-list {
+      width: 100%;
+      padding: 2rem;
+    }
+  }
+
+  .about-us-mobile {
+    width: 100%;
+    padding: 2rem;
+    justify-content: center;
+    text-align: center;
+    background-color: #f5f5f5;
+    color: base.$primary-color;
+    font-family: base.$body-font;
+
+    h2 {
+      font-family: base.$subheader2-font;
+      font-weight: 300;
+      font-size: 1.7rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    p {
+      font-family: base.$body-font;
+      font-weight: 300;
+      font-size: 1rem;
       line-height: 1.5;
       text-align: center;
       max-width: 800px;

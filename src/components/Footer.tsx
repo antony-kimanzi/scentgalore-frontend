@@ -10,7 +10,11 @@ const Footer: React.FC = () => {
         <div className="footer-mobile">
           <div className="links-section-mobile">
             <div className="logo">
-              <img src="/footer-logo.png" alt="Logo" className="logo-mobile" />
+              <img
+                src="https://res.cloudinary.com/dhnyfifkc/image/upload/footer-logo_bjjtra.png"
+                alt="Logo"
+                className="logo-mobile"
+              />
             </div>
             <div className="footer-links-mobile">
               <a
@@ -134,7 +138,11 @@ const Footer: React.FC = () => {
         <div className="footer">
           <div className="links-section">
             <div className="logo">
-              <img src="/footer-logo.png" alt="Logo" className="logo" />
+              <img
+                src="https://res.cloudinary.com/dhnyfifkc/image/upload/footer-logo_bjjtra.png"
+                alt="Logo"
+                className="logo"
+              />
             </div>
             <div className="footer-links">
               <a
@@ -257,6 +265,6 @@ const Footer: React.FC = () => {
       )}
     </div>
   );
-}
+};
 
 export default Footer;

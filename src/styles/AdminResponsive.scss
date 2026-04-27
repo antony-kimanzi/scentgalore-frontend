@@ -1,0 +1,173 @@
+// styles/AdminResponsive.scss - UPDATED
+// Responsive utilities for ALL admin tables
+
+// Force horizontal scrolling for ALL admin tables
+.admin-users .table-container,
+.admin-products .table-container,
+.admin-payments .table-container,
+.admin-orders .table-container,
+.dashboard .tables-section .table-container {
+  position: relative !important;
+  overflow-x: auto !important; // CRITICAL: Force horizontal scrolling
+  -webkit-overflow-scrolling: touch !important;
+  display: block !important; // Ensure block display for scrolling
+
+  // Remove any overflow:hidden that might be set
+  overflow: hidden;
+
+  // Add padding for better visual appearance
+  padding: 0 !important;
+  margin: 0 1rem 2rem !important;
+
+  // Remove border-radius that might interfere with scrolling
+  border-radius: 0 !important;
+
+  @media (max-width: 768px) {
+    margin: 0 0.2rem 1rem !important;
+  }
+}
+
+// CRITICAL: Ensure tables have a minimum width and expand properly
+.admin-users .table-container table,
+.admin-products .table-container table,
+.admin-payments .table-container table,
+.admin-orders .table-container table {
+  width: 100% !important;
+  min-width: 1000px !important; // Force a minimum width for scrolling
+  border-collapse: collapse;
+  table-layout: auto !important; // Allow columns to expand naturally
+
+  // Override all fixed column widths
+  thead th {
+    width: auto !important;
+    min-width: 120px !important;
+    white-space: nowrap !important;
+  }
+
+  tbody td {
+    min-width: 120px !important;
+    white-space: nowrap !important;
+  }
+}
+
+// Set specific minimum widths for each table type
+.admin-users .table-container table {
+  min-width: 1200px !important;
+}
+
+.admin-products .table-container table {
+  min-width: 1400px !important;
+}
+
+.admin-payments .table-container table {
+  min-width: 1200px !important;
+}
+
+.admin-orders .table-container table {
+  min-width: 1300px !important;
+}
+
+// Dashboard tables
+.dashboard .tables-section .table-container {
+  overflow-x: auto !important;
+
+  table {
+    min-width: 900px !important;
+    width: 100% !important;
+  }
+}
+
+// MOBILE SPECIFIC FIXES - This is crucial!
+@media (max-width: 768px) {
+  // Ensure all table containers are scrollable on mobile
+  .admin-users,
+  .admin-products,
+  .admin-payments,
+  .admin-orders {
+    .table-container {
+      // Force scrolling on mobile
+      overflow-x: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
+
+      // Remove any max-width constraints
+      max-width: none !important;
+
+      // Add visual scroll indicators
+      border-left: 1px solid #e9ecef;
+      border-right: 1px solid #e9ecef;
+
+      // Add scrollbar styling for better UX
+      &::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    }
+
+    // Ensure tables have proper minimum widths on mobile
+    table {
+      min-width: 1200px !important; // Ensure enough width for scrolling
+
+      thead th {
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.7rem !important;
+      }
+
+      tbody td {
+        padding: 0.75rem 0.5rem !important;
+        font-size: 0.75rem !important;
+      }
+    }
+  }
+
+  // Specific adjustments for product images on mobile
+  .admin-products {
+    .table-container table {
+      .product-info {
+        min-width: 300px !important;
+
+        .product-image {
+          width: 40px !important;
+          height: 40px !important;
+        }
+
+        .product-details {
+          .product-name {
+            font-size: 0.8rem !important;
+          }
+
+          .product-description {
+            font-size: 0.65rem !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Desktop enhancements
+@media (min-width: 769px) {
+  .admin-users .table-container,
+  .admin-products .table-container,
+  .admin-payments .table-container,
+  .admin-orders .table-container {
+    // Smooth scrolling on desktop
+    scroll-behavior: smooth;
+
+    // Add subtle shadow when scrolling is available
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.05),
+      inset 0 -1px 0 #e9ecef;
+  }
+}

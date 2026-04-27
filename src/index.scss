@@ -12,6 +12,36 @@ $tertiary-color: #f1f1f1;
     box-sizing: border-box;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; // Prevent horizontal scroll
+}
+
 body {
     background-color: $tertiary-color;
+    width: 100%;
+    max-width: 100%;
+    position: relative; // Add this
+}
+
+#root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden; // Add this to root as well
+    position: relative;
+}
+
+// Add these global image rules
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+// Prevent any element from causing overflow
+div, section, article, header, footer, main, nav {
+    max-width: 100%;
 }
