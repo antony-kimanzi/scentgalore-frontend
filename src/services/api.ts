@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
 const BASE_API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+  import.meta.env.VITE_API_URL ||
+  "https://scentgalore-backend.onrender.com/api";
 
 export const api: AxiosInstance = axios.create({
   baseURL: BASE_API_URL,
