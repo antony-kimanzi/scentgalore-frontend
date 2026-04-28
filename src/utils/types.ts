@@ -208,7 +208,6 @@ export interface OrderSummaryProps {
   buttonText: string;
   handleCompleteCheckoutBtn: (
     e: React.MouseEvent<HTMLButtonElement>,
-    paymentOrder: PaymentOrder,
     calculatedTotal: number,
   ) => Promise<void>;
 }

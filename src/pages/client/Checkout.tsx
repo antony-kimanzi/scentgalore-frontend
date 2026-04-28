@@ -647,7 +647,6 @@ export default function Checkout() {
 
   const handleCompleteCheckoutBtn = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    paymentOrder: PaymentOrder,
     calculatedTotal: number,
   ) => {
     console.log("🔄 Checkout button clicked!");

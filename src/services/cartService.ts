@@ -9,7 +9,6 @@ import { api } from "./api";
 
 class CartService {
   private readonly basePath = "/cart";
-  private productCache = new Map<IdParams, any>(); // Cache for product data
 
   async getCart(): Promise<CartResponse> {
     try {
