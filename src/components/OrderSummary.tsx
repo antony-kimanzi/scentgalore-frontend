@@ -5,7 +5,6 @@ import "../styles/OrderSummary.scss";
 import { useNavigate } from "react-router-dom";
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
-  billingData,
   shippingCost,
   buttonText,
   handleCompleteCheckoutBtn,
@@ -29,7 +28,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
 
   const handleGoToProduct = (
     e: React.MouseEvent<HTMLDivElement>,
-    id: IdParams
+    id: IdParams,
   ) => {
     e.preventDefault();
     navigate(`/product/${id}`);
@@ -106,11 +105,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               className="checkout-btn-mobile"
               onClick={(e) => {
                 const calculatedTotal: number = total(cartTotal, shippingCost);
-                const paymentOrder = {
-                  phone: billingData.phoneNumber,
-                  amount: calculatedTotal,
-                };
-                handleCompleteCheckoutBtn(e, paymentOrder, calculatedTotal);
+
+                handleCompleteCheckoutBtn(e, calculatedTotal);
               }}
             >
               {buttonText}
@@ -187,11 +183,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               className="checkout-btn"
               onClick={(e) => {
                 const calculatedTotal: number = total(cartTotal, shippingCost);
-                const paymentOrder = {
-                  phone: billingData.phoneNumber,
-                  amount: calculatedTotal,
-                };
-                handleCompleteCheckoutBtn(e, paymentOrder, calculatedTotal);
+                handleCompleteCheckoutBtn(e, calculatedTotal);
               }}
             >
               {buttonText}
