@@ -1,4 +1,3 @@
-import React from "react";
 import "../styles/ShopPagination.scss";
 
 interface ShopPaginationProps {
@@ -62,7 +61,7 @@ export default function ShopPagination({
           aria-label={`Go to page 1`}
         >
           1
-        </button>
+        </button>,
       );
 
       // Add ellipsis if there's a gap
@@ -70,7 +69,7 @@ export default function ShopPagination({
         renderedElements.push(
           <span key="ellipsis-start" className="page-dots">
             ...
-          </span>
+          </span>,
         );
       }
     }
@@ -86,7 +85,7 @@ export default function ShopPagination({
           aria-current={currentPage === pageNumber ? "page" : undefined}
         >
           {pageNumber}
-        </button>
+        </button>,
       );
       lastPageAdded = pageNumber;
     });
@@ -97,7 +96,7 @@ export default function ShopPagination({
         renderedElements.push(
           <span key="ellipsis-end" className="page-dots">
             ...
-          </span>
+          </span>,
         );
       }
 
@@ -109,7 +108,7 @@ export default function ShopPagination({
           aria-label={`Go to last page ${totalPages}`}
         >
           {totalPages}
-        </button>
+        </button>,
       );
     }
 
